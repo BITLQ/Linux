@@ -54,6 +54,8 @@ ls -l filename:查看test文件的mtime
 通过上面对三个时间参数的变动方式的分析，对它们有了深一点的认识，可是这样，还满足不了我们的需求，我们还希望，可以按照我们自己的想法，自己给的时间任意的去修改它们，所以，touch应声而来，touch命令可以满足我们的需求；
 下表是在网上找的总结的常用的 命令对这三个时间参数的影响！
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B4%5D.png)
+
 touch 命令详解
 
 	1. 了解touch命令
@@ -72,7 +74,11 @@ touch 命令详解
 下面关于参数的信息，我就不截图了，但是参数的描述里，我们依然可以得到我们需要的信息；
 同样我们 info touch, 会看到更详细的说明，和利用touch改变atime和mtime的参数使用方法；这里截取几个明显的说明； 
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B2%5D.png)
+
 参数截图（部分） 
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B3%5D.png)
 
 这些英文说明都是一些比较好理解的英语，作为一个程序员，这些英语应该可以大致看懂的；
 参数列表：
@@ -86,6 +92,7 @@ touch 命令详解
 1.1 -a 参数
 仅修改访问时间的意思是，只把文件的访问时间更新到最新时间，即当前时间戳；
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B8%5D.png)
 
 新建一个文件test,ls -lu test查看atime； 
 执行命令 touch -a test; 
@@ -95,6 +102,8 @@ touch 命令详解
 1.2 -c 参数
 修改文件时间，若该文件不存在则不创建；
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B9%5D.png)
+
 实践结果，就是把存在的文件的三个时间参数更新到最新时间！ 
 
 1.3 -d 参数
@@ -103,8 +112,12 @@ touch 命令详解
 第一种形式：touch -d 121212 test
 将atime mtime修改为指定日期或者时间，ctime更新到最新时间； 
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B10%5D.png)
+
 第二种形式：touch -d “2 days ago” test
 采用鸟哥的实例： 
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B11%5D.png)
 
 你会注意到atime和mtime日期都退回到两天前，而ctime更新到最新时间；
 1.4 -m 参数
@@ -114,6 +127,8 @@ touch 命令详解
 后面可以接欲修改的时间而不用目前的时间，格式为【YYMMDDhhmm】;
 
 touch -t 1409011212 test //年月日时分
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B12%5D.png)
 
 测试结果发现，mtime和atime都变为指定的时间，而ctime更新到最新时间；
 vi,vim 概述
@@ -140,11 +155,14 @@ vim可以用不同的颜色来加亮你的代码。
 就是说vim不仅可以在终端运行，也可以运行于x window、 mac os、windows。 
 5、对vi的完全兼容 
 某些情况下，你可以把vim当成vi来使用。**
+
 善尾
 前文中遗留了一个小问题，就是当你是普通用户时，使用chown或者chgrp改变文件属主或者属组时遇到的权限不够问题；
 可以在命令前加 sudo 命令，如：
 sudo chown root test.cpp;
 如果报以下错误： 
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B5%5D.png)
 
 解决方法： 
 su 进入root 权限；
@@ -160,6 +178,10 @@ vim /etc/sudoers
 
 最后找到图中标注位置： 
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B6%5D.png)
+
 在这行底下照着图上的那行抄一行一样的，把root改为你的普通用户名即可！ 
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/Image%20%5B7%5D.png)
 
 经本人验证，只能加入一个用户~
