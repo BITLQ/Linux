@@ -15,6 +15,8 @@
 我们先 touch 一个空文件 test1 ，(touch 这个命令，后面详述。)
 然后用 stat 查看文件信息，我们现在只看那三个时间，那三个英文单词应该可以认出来吧!（如果觉得英文别扭，可以把linux设置为中文显示；）
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225113031928.png)
+
 注：
 Access   对应  atime;
 Modify  对应  mtime;
@@ -24,17 +26,24 @@ Change 对应  ctime;
 ls -lc filename :查看test文件的ctime
 ls -lu filename :查看test文件的atime
 ls -l filename:查看test文件的mtime
-当然，鸟哥的书上也给出了 # ll –time=atime/ctime filename的形式；
+当然，鸟哥的书上也给出了 # ll –time=atime/ctime filename的形式;
+
+
 ：变动方式
 既然我们已经知道了这三个时间参数是三个主要的变动的时间，那么接下来就是了解他们的变动方式；
+
 1. atime 的变动
 文件的内容被取用时，这个时间就会发生更新，举个最简单的例子，我们平时cat一个文件的时候，就是对文件的内容的读取，那么会不会改变这个时间呢？ 下面我们试试：
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225114553904.png)
 
 分析：因为我们创建test1的时候是个空的文件，所以cat的时候什么都没显示， 对比我们刚开始创建test1时的三个时间，用过cat命令之后，改变的只有atime，而ctime和mtime没有变化；
 2. mtime 的变动方式
 文件的内容数据发生变化时，这个时间参数会发生变动； 
 我们这次测试两个操作： echo 和 vim
 2.1 测试echo 
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225121346650.png)
 
 分析： 我通过echo命令 在test1中导入了hello looker，然后查看stat, 
 通过和上一次的状态对比发现，只有atime没有改变，其它两个时间参数都发生了改变；echo可以在不改变访问时间的基础上，改变文件内容，但是属性怎么也改变了？
@@ -43,10 +52,14 @@ ls -l filename:查看test文件的mtime
 
 在文件中加入一句： nice to meet you!
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225121304379.png)
+
 分析：对比上一次的状态，发现三个时间参数都改变了，这个很容易想到，我们用vim命令（最后对vim做简介）打开了文件，就是读取了文件数据，改变了atime，在文件中加入了一句话，即是改变了文件内容和大小，即改变了mtime和ctime;
 3 . ctime 的变动方式
 文件的状态发生改变，就会更新这个时间；
 前面我们的测试中已经两次改变了ctime，虽然不是去专门测试它的，文件的状态就很多了，比如权限和属性，比如前面发生改变的文件大小，所以说，一般情况下，mtime发生改变都会影响ctime,那么我们想单纯的改变ctime，而不改变其它两个时间参数，我们可以试试改变文件权限：
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225123843365.png)
 
 分析：我们先看了一下test1原本的权限，然后赋予了它一个新的权限，然后stat test1，可以看到，改变的只有ctime; 这样我们对ctime的变动方式就有了一个更清晰的了解；
 注： 如果你是普通用户去修改文件属性而权限不够的话，可以在命令的最前面加上sudo, 如果还是不行，提示user没有在sudoers文件中的话，可以在sudoers文件中添加，方法在文章最后给出！
