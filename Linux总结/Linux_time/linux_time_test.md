@@ -15,6 +15,8 @@
 我们先 touch 一个空文件 test1 ，(touch 这个命令，后面详述。)
 然后用 stat 查看文件信息，我们现在只看那三个时间，那三个英文单词应该可以认出来吧!（如果觉得英文别扭，可以把linux设置为中文显示；）
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_time/20161225113031928.png)
+
 注：
 Access   对应  atime;
 Modify  对应  mtime;
@@ -24,9 +26,12 @@ Change 对应  ctime;
 ls -lc filename :查看test文件的ctime
 ls -lu filename :查看test文件的atime
 ls -l filename:查看test文件的mtime
-当然，鸟哥的书上也给出了 # ll –time=atime/ctime filename的形式；
+当然，鸟哥的书上也给出了 # ll –time=atime/ctime filename的形式;
+
+
 ：变动方式
 既然我们已经知道了这三个时间参数是三个主要的变动的时间，那么接下来就是了解他们的变动方式；
+
 1. atime 的变动
 文件的内容被取用时，这个时间就会发生更新，举个最简单的例子，我们平时cat一个文件的时候，就是对文件的内容的读取，那么会不会改变这个时间呢？ 下面我们试试：
 
