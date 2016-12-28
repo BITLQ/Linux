@@ -53,12 +53,16 @@ find test.txt // 直接查找不加参数选项，直接在当前目录查找
 首先，我们先找一个不存在的命令，看结果：
 which sb
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/4.png)
+
 ：看到没，没有 no sb in，然后后面的括号里就是PATH环境变量的路径，不信的话你可以 echo $PATH 看一看；
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/5.png)
 
 ： 尝试查找命令 ls：
 # which ls
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/6.png)
 
 
 1.4 查找命令–whereis
@@ -66,7 +70,7 @@ which sb
 命令使用： 查找命令 ls
 # whereis   ls
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/7.png)
 
 
 1.5 查找命令–whatis
@@ -75,15 +79,13 @@ which sb
 比如我们查看 ls 命令和 chown 命令；
 # whatis  ls# whatis  chown
 
-	* 12
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/8.png)
 
 
 第二部分： find 命令详细分析
 find命令的介绍前面已经简单的说明和简单的使用过了，下面我们对find命令的参数及使用进行详细介绍；
 2.1 find命令的使用格式
 find   [PATH]    [option]   [action] 
-
-	* 1
 
 2.2 find命令的参数介绍
 find 命令不可谓不强大，可以代替很多命令，但是与之相随的就是繁多的参数选项；
@@ -92,16 +94,18 @@ find 命令不可谓不强大，可以代替很多命令，但是与之相随的
 2> 于用户用户组名有关的参数； 
 3> 与文件权限及名称有关的参数； 
 4> 其他可进行的操作；
+
 下面按照参数分类进行部分举例说明：
 2.2.1 与时间有关的参数
 注：与时间有关的参数有 -atime,-ctime,-mtime;
 关于这三个时间参数我专门有一篇博客介绍： 
+
 http://blog.csdn.net/bitboss/article/details/53870273
 参数格式： 以mtime为例；
 -mtime n : 在n天之前的 <一天之内>被修改过的文件；
 ：# find   /root/code/  -mtime  1  //这个路径下一天前的一天之内，内容被修改的文件；
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/9.png)
 
 
 -mtime +n : 列出n天之前（不包括n天），被更改过的文件； 
@@ -110,13 +114,12 @@ http://blog.csdn.net/bitboss/article/details/53870273
 ：# find   /   -mtime  +2     //列出根目录下2天之前被修改的文件  
 ：# find   /   -mtime  -2      //列出2天之内被更改过的文件
 
-	* 12
 
 * -newer file : * file为一个存在的文件，列出比file还要新的文件；
 ：# find    /root/code/    -newer  /root/code/test.c
 //列出 /root/code/ 目录下比  /root/code/test.c  文件还要新的文件；
 
-	* 12
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/10.png)
 
 
 注： 可以在目录下 ll 命令查看对比；
