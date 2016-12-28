@@ -131,16 +131,16 @@ http://blog.csdn.net/bitboss/article/details/53870273
 -user name : name为用户名，查找目录下属于该用户的文件！
 ：#find  /home  -user  bossliu //bossliu  是我的用户，请输入自己的用户名；
 
-//查找 home 目录下属于bossliu用户的文件；//不做截图展示
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/11.png)
 
-	* 1234
+//查找 home 目录下属于bossliu用户的文件；//不做截图展示
 
 -group name : 类似上一条命令，查找目录下属于该用户组的文件；
 ：#find   /home   -user    bossliu  //请输自己的用户组//为什么和上一条命令一样呢，因为如果你在创建用户的时候没有指定的用户组，linux默认以用户名生成一个用户组；
 
-// 命令结果和 -user  name  的结果一样;
+// 命令结果和 -user  name  的结果
 
-	* 1234
+
 
 -nouser : 查找给定目录下无属主的文件； 
 -nogroup :查找给定目录下无属组的文件；
@@ -149,7 +149,6 @@ http://blog.csdn.net/bitboss/article/details/53870273
 
 //不做截图展示
 
-	* 1234
 
 2.2.3 与文件权限及名称有关的参数
 参数格式 ：
@@ -162,21 +161,20 @@ http://blog.csdn.net/bitboss/article/details/53870273
 // f： 普通文件 等等；
 ：# find  /root  -type  l//查找 /root 目录下文件类型为“链接”的文件；
 
-	* 12
 
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/12.png)
 
 注： 文件的类型将在文件系统概述的博客中讲解；
 -size [-+]SIZE : 查找指定目录下大于小于或等于 SIZE的文件，注意，SIZE也有单位， c 代表 byte, k 代表 KB；当然还有 M，和 G；
 ：#find   /root/code   -size  +1k 
 //查找 /root/code 目录下大小  >1KB的文件；
 
-	* 12
-
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/13.png)
 
 可以在这个目录下 ll 看一下文件大小：
 ：# cd  /root/code; ll   
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/14.png)
 
 
 注：经测试小于1k的文件要查找的话只能用 <1000c 查找；
@@ -184,7 +182,7 @@ http://blog.csdn.net/bitboss/article/details/53870273
  : # ll      //查看目录下的文件权限
 ：# find  -perm  777     //查找权限为777的文件；
 
-	* 12
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/15.png)
 
 
 -perm -mode : 在指定目录下查找“至少包含mode权限的文件”；
@@ -192,14 +190,14 @@ http://blog.csdn.net/bitboss/article/details/53870273
 // 那么这个文件也会被找出来；
 :# find  -perm -644
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/17.png)
 
 
 -perm +mode : 在指定目录下查找文件权限包含“任一mode权限”的文件； 
 // 举个例子，mode是 -rw-rw-rw-, 而test文件的权限是 -rw-r–r–; 那么test文件也会被列出；
-:# find  -perm -644
+:# find  -perm +644
 
-	* 1
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/16.png)
 
 
 当然还有可以查找特殊权限的文件，比如含有SGID,SUID,SBIT属性的文件，这里就不一一举例了；
@@ -210,6 +208,8 @@ http://blog.csdn.net/bitboss/article/details/53870273
 注意： 这个参数的使用格式；
 ： #  find  -perm -644 -exec  ls  -l  {} \;
 // 将查找的文件用 ls  -l  命令列出来； 注意使用时后面的 {}  \ ;{} 存放的就是查找结果；‘\’ 代表命令的结束而且还和 ‘；’构成转义；
+
+![](https://github.com/BITLQ/Linux/blob/master/Linux%E6%80%BB%E7%BB%93/Linux_Find/photo/18.png)
 
 第三部分： 总结
 通过对以上find命令的介绍，对find命令有了更深刻的认识，同时我们所说的命令参数还不是完整的，find还有有些不常用的参数没有介绍，可以通过man 去了解；
