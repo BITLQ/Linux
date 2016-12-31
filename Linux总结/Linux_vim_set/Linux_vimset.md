@@ -62,6 +62,17 @@ Linux下g++/gdb的简单安装和vim的配置
 其实这三个都是利用 yum 安装的；
 
 
+**安装中文输入法 **
+
+```
+安装中文包
+：# yum install "@Chinese Support"
+```
+
+**设置步骤**
+
+http://jingyan.baidu.com/article/da1091fb3e7f8a027849d681.html
+
 ----------
 
 **vim的配置**
@@ -236,14 +247,21 @@ http://www.cnblogs.com/ma6174/archive/2011/12/10/2283393.html
 
 ![这里写图片描述](http://img.blog.csdn.net/20161229145749719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYml0Ym9zcw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-如果你在执行这条命令时报错，提示。。。。。-no-check。。。
-只需要这样执行即可：
+建议先执行这条命令：
 
 ```
-：#wget https://raw.github.com/ma6174/vim/master/setup.sh --no-check-certificate && bash setup.sh
+# wget https://raw.github.com/ma6174/vim/master/setup.sh && bash setup.sh
+```
+
+如果你在执行这条命令时报错，提示。。。。。-no-check。。。
+再这样执行即可：
+```
+# wget https://raw.github.com/ma6174/vim/master/setup.sh --no-check-certificate && bash setup.sh
 ```
 
 注： 在连网的环境下执行即可自动下载安装；
 
 但是可能安装好之后vim 一个文件会出现很多问题，因为可能因为每个人Linux配置不同的原因，很多东西用不了，那么只需要按照提示出错的行号，进入文件将对应行用 **引号** 注释掉即可；
+
+一般没有错误；这时候你还缺少一个WinManager的插件，下载安装；
  
