@@ -1,0 +1,10 @@
+消息队列：
+
+1.每一个IPC都有唯一的数据结构 ipc_perm;
+2.ipc_perm 的数据成key唯一表示一份ipc资源；
+3.消息队列，共享内存和信号量都有ipc_perm这样一个数据结构；
+
+
+编写消息队列代码的函数简介：
+1.创建新消息队列或获取已存在的消息队列： int msgget(key_t key,int msgflg);
+	key由函数ftok获取；
