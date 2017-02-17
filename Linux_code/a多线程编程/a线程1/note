@@ -1,0 +1,82 @@
+作业：gcc如何生成动态库和静态库
+
+线程的概念：
+同一进程的多个线程共享同一个地址空间； 进程内部的多个执行流； 本质是将一个进程的地址空间和页表划分为多个部分，多个线程分别执行；
+
+进程和线程的不同：
+
+1.进程是分配资源的基本单位，线程是调度的基本单位；
+2.线程是用进程模拟的；
+3.Linux下的进程叫轻量级进程；
+4.线程间的通信比进程简单，定义全局变量就可以；
+
+各线程共享的进程资源有：
+
+1.代码和数据；
+2.文件描述符
+3.信号的处理方式
+4.当前的工作目录
+5.用户id和组id
+
+各线程私有的资源有：
+1.线程id
+2.*上下文和各种寄存器的，程序计数器PC指针和栈指针；
+3.*栈空间
+4.error变量
+5.信号屏蔽子
+6.调度优先级
+
+
+echo $?    //取得上一个命令的推出码；
+
+函数：
+
+1.创建线程
+#include <pthread.h>
+
+       int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+                          void *(*start_routine) (void *), void *arg);
+
+       Compile and link with -pthread.  //链接时必须加上 -lpthread
+
+2.获取线程id
+#include <pthread.h>
+
+       pthread_t pthread_self(void);
+
+       Compile and link with -pthread.
+
+3.监控
+	ps -aL    //其中选项LWP表示轻量级线程的id
+	其中和pid相同的PWD表示的是主线程，主线程必须等待其他线程结束；
+
+4.等待线程的函数
+ #include <pthread.h>
+
+       int pthread_join(pthread_t thread, void **retval); //第二个参数读取退出码，需要定义一个变量；
+
+       Compile and link with -pthread.
+
+5.线程终止
+
+如果需要只终⽌止某个线程⽽而不终⽌止整个进程,可以有三种⽅方法:  
+1. 从线程函数return。这种⽅方法对主线程不适⽤用,从main函数return相当于调⽤用exit。  
+2. ⼀一个线程可以调⽤用pthread_cancel终⽌止同⼀一进程中的另⼀一个线程。 
+3. 线程可以调⽤用pthread_exit终⽌止⾃自⼰己。
+
+ #include <pthread.h>
+
+       int pthread_cancel(pthread_t thread);
+
+       Compile and link with -pthread.
+
+
+
+
+
+
+
+
+
+
+
